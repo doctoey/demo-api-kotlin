@@ -13,33 +13,33 @@ class GetEmployeeController(
 
     @GetMapping
     fun getEmployeeAll(): List<EmployeeResponse> {
-        return employeeService.getListEmployee()
+        return employeeService.getAllEmployees()
     }
 
     @GetMapping("/{id}")
     fun getEmployeeById(@PathVariable id:String): EmployeeResponse {
-        return employeeService.getById(id)
+        return employeeService.getEmployeeById(id)
     }
 
     @PatchMapping("/{id}")
-    fun patchEmployeeById(
+    fun updateEmployeeById(
         @PathVariable id: String,
         @RequestBody data: EmployeeResponse
     ): EmployeeResponse {
-        return employeeService.patch(id, data)
+        return employeeService.updateEmployeeData(id, data)
     }
 
     @PutMapping("/{id}")
-    fun putEmployeeById(
+    fun replaceEmployeeById(
         @PathVariable id: String,
         @RequestBody data: EmployeeResponse
     ): EmployeeResponse {
-        return employeeService.put(id, data)
+        return employeeService.replaceEmployeeData(id, data)
     }
 
     @DeleteMapping("/{id}")
-    fun deleteEmployeeById(@PathVariable id: String) {
-        return employeeService.delete(id)
+    fun removeEmployeeById(@PathVariable id: String) {
+        return employeeService.removeEmployeeById(id)
     }
 
 }

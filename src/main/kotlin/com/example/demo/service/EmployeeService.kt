@@ -10,19 +10,20 @@ import org.springframework.stereotype.Service
 class EmployeeService(
     val employeeRepository: EmployeeRepository
 ) {
-    fun getListEmployee(): List<EmployeeResponse> {
+    fun getAllEmployees(): List<EmployeeResponse> {
         return employeeRepository.findAll().map {
             EmployeeResponse.fromEmployeeResponse(it)
         }
     }
 
-    fun getById(id: String): EmployeeResponse {
+    fun getEmployeeById(id: String): EmployeeResponse {
         return employeeRepository.findById(id).let{
             EmployeeResponse.fromEmployeeResponse(it.get())
         }
     }
 
-    fun patch(id: String, data: EmployeeResponse): EmployeeResponse {
+//patch
+    fun updateEmployeeData(id: String, data: EmployeeResponse): EmployeeResponse {
         return employeeRepository.findById(id).let {
             val employee = it.get()
             employee.name = data.name!!
@@ -32,8 +33,9 @@ class EmployeeService(
         }
     }
 
-//    patch ไม่มี salary ได้ แต่ put มีทั้ง 3 อย่าง
-    fun put(id: String, data: EmployeeResponse): EmployeeResponse {
+//patch ไม่มี salary ได้ แต่ put ต้องมีทั้ง 3 อย่าง
+//put
+    fun replaceEmployeeData(id: String, data: EmployeeResponse): EmployeeResponse {
         return employeeRepository.findById(id).let {
             val employee = it.get()
             employee.name = data.name!!
@@ -44,7 +46,8 @@ class EmployeeService(
         }
     }
 
-    fun delete(id: String) {
+//delete
+    fun removeEmployeeById(id: String) {
         employeeRepository.deleteById(id)
     }
 }
