@@ -2,10 +2,8 @@ package com.example.demo.controller
 
 import com.example.demo.model.EmployeeResponse
 import com.example.demo.service.EmployeeService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/employee")
@@ -15,11 +13,33 @@ class GetEmployeeController(
 
     @GetMapping
     fun getEmployeeAll(): List<EmployeeResponse> {
-        return employeeService.getListEmployee()
+        return employeeService.getAllEmployees()
     }
 
     @GetMapping("/{id}")
     fun getEmployeeById(@PathVariable id:String): EmployeeResponse {
-        return employeeService.getById(id)
+        return employeeService.getEmployeeById(id)
     }
+
+    @PatchMapping("/{id}")
+    fun updateEmployeeById(
+        @PathVariable id: String,
+        @RequestBody data: EmployeeResponse
+    ): EmployeeResponse {
+        return employeeService.updateEmployeeData(id, data)
+    }
+
+    @PutMapping("/{id}")
+    fun replaceEmployeeById(
+        @PathVariable id: String,
+        @RequestBody data: EmployeeResponse
+    ): EmployeeResponse {
+        return employeeService.replaceEmployeeData(id, data)
+    }
+
+    @DeleteMapping("/{id}")
+    fun removeEmployeeById(@PathVariable id: String) {
+        return employeeService.removeEmployeeById(id)
+    }
+
 }
