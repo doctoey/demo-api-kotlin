@@ -3,9 +3,9 @@ package com.example.demo.entity
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "employee")
-class EmployeeEntity {
-    var id: String = ""
-    var name: String = ""
-    var age: Int = 0
-    var salary: Int = 0
-}
+data class EmployeeEntity(
+    val id: String? = null,
+    val name: String,
+    val age: Int?,
+    val salary: Int?
+)
