@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/employee")
 class GetEmployeeController(
-     val employeeService: EmployeeService,
+        val employeeService: EmployeeService
 ) {
 
     @GetMapping

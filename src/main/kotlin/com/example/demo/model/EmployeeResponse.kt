@@ -7,7 +7,9 @@ data class EmployeeResponse (
     val name: String?,
     val age: Int?,
     val salary: Int?
-) {
+){
+
+
     companion object {
         fun fromEmployeeResponse(employeeEntity: EmployeeEntity): EmployeeResponse {
             return EmployeeResponse (
@@ -17,5 +19,5 @@ data class EmployeeResponse (
                 salary = employeeEntity.salary
             )
         }
-    }
+        }
 }
