@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/employee")
 class GetEmployeeController(
-        val employeeService: EmployeeService
+    val employeeService: EmployeeService
 ) {
 
     @GetMapping
@@ -19,32 +19,32 @@ class GetEmployeeController(
     }
 
     @GetMapping("/{id}")
-    fun getEmployeeById(@PathVariable id:String): EmployeeResponse {
+    fun getEmployeeById(@PathVariable id: String): EmployeeResponse {
         return employeeService.getEmployeeById(id)
     }
 
     @PatchMapping("/{id}")
     fun updateEmployeeById(
         @PathVariable id: String,
-        @RequestBody data: EmployeeResponse
-    ): EmployeeResponse {
-        return employeeService.updateEmployeeData(id, data)
+        @RequestBody data: EmployeeRequest
+    ): String {
+        return employeeService.updateEmployeeById(id, data)
     }
 
     @PutMapping("/{id}")
-    fun replaceEmployeeById(
+    fun updateAllFieldEmployeeById(
         @PathVariable id: String,
         @RequestBody data: EmployeeResponse
-    ): EmployeeResponse {
-        return employeeService.replaceEmployeeData(id, data)
+    ): String {
+        return employeeService.updateAllFieldEmployeeById(id, data)
     }
 
     @DeleteMapping("/{id}")
-    fun removeEmployeeById(@PathVariable id: String) {
-        return employeeService.removeEmployeeById(id)
+    fun deleteEmployeeById(@PathVariable id: String) {
+        return employeeService.deleteEmployeeById(id)
     }
 
-    @PostMapping
+    @PostMapping("/")
     fun createEmployee(@RequestBody data: EmployeeRequest): ResponseEntity<ResponseEntity<EmployeeResponse>> {
         val newEmployee = employeeService.createEmployee(data)
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee)
